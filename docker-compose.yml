@@ -1,0 +1,30 @@
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - 1panel-network
+    env_file:
+      - .env
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+      HEALTH_ADDR: 0.0.0.0:8900
+      # 外部数据库连接（不在本 compose 内创建 MySQL）
+      # - 直接在 .env 里配置 MYSQL_HOST/MYSQL_PORT/MYSQL_USER/MYSQL_PASSWORD/MYSQL_DATABASE
+      # - 容器内如检测到 MYSQL_HOST=127.0.0.1/localhost，会自动切换为 host.docker.internal
+    extra_hosts:
+      # 让 Linux 下也能解析 host.docker.internal（Docker 20.10+）
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8900:8900"
+    volumes:
+      # 容器持久化：用于保存运行时产生的文件（如未来的导出文件、缓存等）。
+      # 目前机器人主要数据都在外部 MySQL，但仍建议预留一个持久化目录，避免容器重建后丢失本地文件。
+      - ./data:/app/data
+
+networks:
+  1panel-network:
+    external: true
+    name: 1panel-network
