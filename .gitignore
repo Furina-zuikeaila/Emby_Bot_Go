@@ -1,0 +1,25 @@
+# 临时/备份文件
+*~
+*.swp
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# 编辑器/系统文件
+.DS_Store
+Thumbs.db
+
+# 运行时输出
+*.log
+
+# Go 构建产物
+*.exe
+*.out
+*.test
+
+# 常见临时副本（例如 main.go.123456）
+*.go.*
+
+# 容器/运行时数据（如有）
+/data/
