@@ -4,7 +4,7 @@
 - Go 1.21（看 `go.mod`）
 - Telegram Bot Token（去 @BotFather 拿）
 - 如果要存数据：MySQL（项目用 GORM）
-- 可选：Docker / docker-compose（想省心用容器）
+- 只有：docker-compose
 
 
 2. 在项目根建个 `.env`（开发用），把常用环境变量写上：
